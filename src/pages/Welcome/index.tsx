@@ -1,35 +1,34 @@
 import React from 'react';
 import { Text, Image, TouchableOpacity } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 import wateringImg from '../../assets/watering.png';
-import style from './styles';
+import styles from './styles';
 
 import { SafeAreaViewAndroid } from '../../components/SafeAreaViewAndroid';
 
 export function Welcome() {
   return (
-    <SafeAreaViewAndroid style={style.container}>
-      <Text style={style.title}>
+    <SafeAreaViewAndroid style={styles.container}>
+      <Text style={styles.title}>
         Gerencie {'\n'} 
-        suas plantas {'\n'} 
-        de forma fácil
+        suas plantas de {'\n'} 
+        forma fácil
       </Text>
 
       <Image 
         source={wateringImg} 
-        style={style.image}
+        style={styles.image}
         resizeMode='contain'
       />
 
-      <Text style={style.subtitle}>
-        Não esqueça mais de regar suas plantas. 
+      <Text style={styles.subtitle}>
+        Não esqueça mais de regar suas plantas.
         Nós cuidamos de lembrar você sempre que precisar.
       </Text>
 
-      <TouchableOpacity style={style.button} activeOpacity={0.7}>
-        <Text style={style.buttonText}>
-          &gt;
-        </Text>
+      <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+        <Feather name="chevron-right" style={styles.buttonIcon} />
       </TouchableOpacity>
     </SafeAreaViewAndroid>
   )
