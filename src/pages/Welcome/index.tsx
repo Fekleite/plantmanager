@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Image, TouchableOpacity } from 'react-native';
 
-import wateringImg from '../assets/watering.png';
+import wateringImg from '../../assets/watering.png';
 
 import style from './styles';
 
