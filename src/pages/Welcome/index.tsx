@@ -2,7 +2,6 @@ import React from 'react';
 import { Text, Image, TouchableOpacity } from 'react-native';
 
 import wateringImg from '../../assets/watering.png';
-
 import style from './styles';
 
 import { SafeAreaViewAndroid } from '../../components/SafeAreaViewAndroid';
@@ -16,11 +15,15 @@ export function Welcome() {
         de forma fácil
       </Text>
 
-      <Image source={wateringImg} style={style.image} />
+      <Image 
+        source={wateringImg} 
+        style={style.image}
+        resizeMode='contain'
+      />
 
       <Text style={style.subtitle}>
-        Não esqueça mais de regar suas plantas. Nós cuidamos de lembrar você
-        sempre que precisar.
+        Não esqueça mais de regar suas plantas. 
+        Nós cuidamos de lembrar você sempre que precisar.
       </Text>
 
       <TouchableOpacity style={style.button} activeOpacity={0.7}>
