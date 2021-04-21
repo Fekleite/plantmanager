@@ -4,18 +4,15 @@ import fonts from '../../styles/fonts';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: colors.green,
     height: 56,
     borderRadius: 16,
+    backgroundColor: colors.green,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   text: {
     fontSize: 17,
     color: colors.white,
     fontFamily: fonts.buttonText,
   },
-  disabled: {
-    opacity: 0.5,
-  }
 })
