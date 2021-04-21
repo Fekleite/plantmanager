@@ -1,18 +1,19 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, TouchableOpacityProps } from 'react-native';
 
 import styles from './styles';
 
-interface ButtonProps{
+interface ButtonProps extends TouchableOpacityProps {
   text: string;
   disabled?: boolean;
 }
 
-export function Button({ text, disabled = false }: ButtonProps) {
+export function Button({ text, disabled = false, ...rest }: ButtonProps) {
   return(
     <TouchableOpacity 
       style={styles.container}
       disabled={disabled}
+      {...rest}
     >
       <Text style={styles.text}>
         {text}

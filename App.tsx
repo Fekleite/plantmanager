@@ -3,15 +3,17 @@ import AppLoading from 'expo-app-loading';
 import { 
   useFonts,
   Jost_400Regular,
-  Jost_600SemiBold
+  Jost_600SemiBold,
+  Jost_500Medium
 } from '@expo-google-fonts/jost'
 
-import { Welcome } from './src/pages/Welcome';
+import Routes from './src/routes';
 
 export default function App() {
   const [ fontsLoaded ] = useFonts({
     Jost_400Regular,
-    Jost_600SemiBold
+    Jost_600SemiBold,
+    Jost_500Medium
   });
 
   if (!fontsLoaded) {
@@ -19,6 +21,6 @@ export default function App() {
   }
 
   return (
-    <Welcome />
+    <Routes />
   )
 }
