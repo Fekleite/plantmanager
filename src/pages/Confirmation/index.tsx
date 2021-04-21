@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 import styles from './styles';
 
@@ -7,6 +8,11 @@ import { SafeAreaViewAndroid } from '../../components/SafeAreaViewAndroid';
 import { Button } from '../../components/Button';
 
 export function Confirmation() {
+  const navigation = useNavigation();
+
+  function handleMoveOn() {
+    navigation.navigate('PlantSelect')
+  }
   
   return (
     <SafeAreaViewAndroid style={styles.container} >
@@ -23,7 +29,7 @@ export function Confirmation() {
         </Text>
 
         <View style={styles.footer}>
-          <Button text='Começar'/>
+          <Button text='Começar' onPress={handleMoveOn} />
         </View>
       </View>
     </SafeAreaViewAndroid>
