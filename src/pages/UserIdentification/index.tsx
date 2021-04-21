@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { 
+  Text, 
+  TextInput, 
+  View, 
+  KeyboardAvoidingView, 
+  Platform, 
+  TouchableWithoutFeedback, 
+  Keyboard
+} from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 
 import styles from './styles';
@@ -39,36 +47,38 @@ export function UserIdentification() {
       <KeyboardAvoidingView 
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
-        <View style={styles.content}>
-          <View style={styles.form}>
-            <View style={styles.header}>
-              <Text style={styles.emoji}>
-                { isFilled ? '😁' : '😀' } 
-              </Text>
-              <Text style={styles.title}>
-                Como podemos {'\n'}
-                chamar você?
-              </Text>
-            </View>
+      > 
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.content}>
+            <View style={styles.form}>
+              <View style={styles.header}>
+                <Text style={styles.emoji}>
+                  { isFilled ? '😁' : '😀' } 
+                </Text>
+                <Text style={styles.title}>
+                  Como podemos {'\n'}
+                  chamar você?
+                </Text>
+              </View>
 
-            <TextInput 
-              style={[
-                styles.input,
-                (isFocused || isFilled) && styles.inputFocused
-              ]}
-              placeholder='Digite um nome'
-              placeholderTextColor='#CFCFCF'
-              onBlur={handleInputBlur}
-              onFocus={handleInputFocus}
-              onChangeText={handleInputChange}
-            />
+              <TextInput 
+                style={[
+                  styles.input,
+                  (isFocused || isFilled) && styles.inputFocused
+                ]}
+                placeholder='Digite um nome'
+                placeholderTextColor='#CFCFCF'
+                onBlur={handleInputBlur}
+                onFocus={handleInputFocus}
+                onChangeText={handleInputChange}
+              />
 
-            <View style={styles.footer}>
-              <Button text='Confirmar' onPress={handleSubmit} />
+              <View style={styles.footer}>
+                <Button text='Confirmar' onPress={handleSubmit} />
+              </View>
             </View>
           </View>
-        </View>
+        </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </SafeAreaViewAndroid>
   )
