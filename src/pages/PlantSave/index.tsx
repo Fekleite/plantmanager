@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { Image, ScrollView, View, Text, TouchableOpacity, Platform, Alert } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity, Platform, Alert } from 'react-native';
 import { SvgFromUri } from 'react-native-svg';
 import { Feather } from '@expo/vector-icons';
 import { useRoute, useNavigation } from '@react-navigation/core';
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
 import { isBefore, format } from 'date-fns';
 
-import waterDrop from '../../assets/waterdrop.png';
 import styles from './styles';
 
 import { Button } from '../../components/Button';
 
 import { Plant, savePlant } from '../../libs/storage';
+import { Tip } from '../../components/Tip';
 
 interface Params {
   plant: Plant;
@@ -56,7 +56,15 @@ export function PlantSave() {
         dateTimeNotification: selectedDateTime
       })
 
-      
+      const params = {
+        title: 'Tudo certo',
+        subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com bastante amor.',
+        buttonText: 'Muito obrigado :D',
+        icon: 'hug',
+        nextScreen: 'MyPlants',
+      }
+
+      navigation.navigate('Confirmation', params)
     } catch (error) {
       return Alert.alert('Ops, não foi possível salvar sua planta. 😓')
     }
@@ -87,16 +95,10 @@ export function PlantSave() {
       </View>
 
       <View style={styles.controllers}>
-        <View style={styles.tipContainer}>
-          <Image 
-            source={waterDrop}
-            style={styles.tipImage}
-          />
-
-          <Text style={styles.tipText}>
-            {plant.water_tips}
-          </Text>
-        </View>
+        <Tip 
+          text={plant.water_tips}
+          style={styles.tipRelative}
+        />
 
         <View style={styles.alert}>
           <Text style={styles.alertLabel}>

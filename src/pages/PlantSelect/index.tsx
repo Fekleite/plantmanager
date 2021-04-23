@@ -31,10 +31,9 @@ export function PlantSelect() {
   const navigation = useNavigation();
 
   async function fetchPlants() {
-    const { data } = await api
-      .get(`plants?_sort=name&_order=asc&_page=${page}&_limit=8`)
+    const { data } = await api.get(`plants?_sort=name&_order=asc&_page=${page}&_limit=8`)
 
-    if(!data) return setIsLoading(true)
+    if(!data) return setIsLoading(true);
 
     if(page > 1) {
       setPlants(oldValue => [...oldValue, ...data])
