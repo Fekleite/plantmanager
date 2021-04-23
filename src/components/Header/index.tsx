@@ -6,7 +6,11 @@ import styles from './styles';
 
 import userImg from '../../assets/fernanda.png'
 
-export function Header() {
+interface HeaderProps {
+  hasGreeting?: boolean;
+}
+
+export function Header({ hasGreeting = false }: HeaderProps) {
   const [username, setUsername] = useState<string>();
 
   useEffect(() => {
@@ -20,12 +24,19 @@ export function Header() {
 
   return(
     <View style={styles.container}>
-      <View>
-        <Text style={styles.greeting}>Olá,</Text>
-        <Text style={styles.userName}>
-          {username}
-        </Text>
-      </View>
+      {hasGreeting ? (
+        <View>
+          <Text style={styles.greeting}>Minhas</Text>
+          <Text style={styles.userName}>Plantinhas</Text>
+        </View>
+      ):(
+        <View>
+          <Text style={styles.greeting}>Olá,</Text>
+          <Text style={styles.userName}>
+            {username}
+          </Text>
+        </View>
+      )}
       <Image source={userImg} style={styles.avatar}/>
     </View>
   )
