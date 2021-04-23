@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   Text, 
   TextInput, 
@@ -20,17 +20,32 @@ import { Button } from '../../components/Button';
 export function UserIdentification() {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
-  const [name, setName] = useState<string>();
+  const [name, setName] = useState<string>('');
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    async function getUsername() {
+      const data = await AsyncStorage.getItem('@plantmanager:user');
+      const username = data ? data : ''
+      
+      setName(username);
+    }
+
+    getUsername();
+  }, [])
 
   async function handleSubmit() {
     if(!name) {
       return Alert.alert('Por favor, informe como podemos chamar você 😓')
     }
 
-    await AsyncStorage.setItem('@plantmanager:user', name);
-    navigation.navigate('Confirmation')
+    try {
+      await AsyncStorage.setItem('@plantmanager:user', name);
+      navigation.navigate('Confirmation')
+    } catch (error) {
+      return Alert.alert('Ops, não foi possível salvar seu nome. 😓')
+    }
   }
 
   function handleInputBlur() {
@@ -71,6 +86,7 @@ export function UserIdentification() {
                   styles.input,
                   (isFocused || isFilled) && styles.inputFocused
                 ]}
+                value={name}
                 placeholder='Digite um nome'
                 placeholderTextColor='#CFCFCF'
                 onBlur={handleInputBlur}

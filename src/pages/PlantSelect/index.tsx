@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { EnvironmentButton } from '../../components/EnvironmentButton';
 import { Header } from '../../components/Header';
@@ -11,33 +12,23 @@ import api from '../../services/api';
 
 import styles from './styles';
 
+import { Plant as PlantState } from '../../libs/storage';
 interface EnvironmentState {
   key: string;
   title: string;
 }
 
-interface PlantsState {
-  id: number;
-  name: string;
-  about: string;
-  water_tips: string;
-  photo: string;
-  environments: [string];
-  frequency: {
-    times: number;
-    repeat_every: string;
-  };
-}
-
 export function PlantSelect() {
   const [environments, setEnvironments] = useState<EnvironmentState[]>();
-  const [plants, setPlants] = useState<PlantsState[]>([]);
-  const [filteredPlants, setFilteredPlants] = useState<PlantsState[]>([]);
+  const [plants, setPlants] = useState<PlantState[]>([]);
+  const [filteredPlants, setFilteredPlants] = useState<PlantState[]>([]);
   const [environmentSelected, setEnvironmentSelected] = useState('all');
   const [isLoading, setIsLoading] = useState(true);
 
   const [page, setPage] = useState(1);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+  const navigation = useNavigation();
 
   async function fetchPlants() {
     const { data } = await api
@@ -67,6 +58,10 @@ export function PlantSelect() {
     const filtered = plants?.filter(plant => plant.environments.includes(environment))
 
     setFilteredPlants(filtered);
+  }
+
+  function handlePlantSelect(plant: PlantState) {
+    navigation.navigate('PlantSave', { plant });
   }
 
   function handleFetchMore(distance: number) {
@@ -134,7 +129,8 @@ export function PlantSelect() {
             renderItem={({ item }) => (
               <PlantCardPrimary 
                 name={item.name} 
-                photo={item.photo} 
+                photo={item.photo}
+                onPress={() => handlePlantSelect(item)}
               />
             )}
             numColumns={2}
