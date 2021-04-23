@@ -6,9 +6,11 @@ import {
   KeyboardAvoidingView, 
   Platform, 
   TouchableWithoutFeedback, 
-  Keyboard
+  Keyboard,
+  Alert
 } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import styles from './styles';
 
@@ -22,10 +24,13 @@ export function UserIdentification() {
 
   const navigation = useNavigation();
 
-  function handleSubmit() {
-    if(!!name) {
-      navigation.navigate('Confirmation')
+  async function handleSubmit() {
+    if(!name) {
+      return Alert.alert('Por favor, informe como podemos chamar você 😓')
     }
+
+    await AsyncStorage.setItem('@plantmanager:user', name);
+    navigation.navigate('Confirmation')
   }
 
   function handleInputBlur() {
