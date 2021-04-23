@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import styles from './styles';
-
 import userImg from '../../assets/fernanda.png'
+import styles from './styles';
 
 interface HeaderProps {
   hasGreeting?: boolean;

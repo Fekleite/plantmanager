@@ -4,6 +4,7 @@ export default {
   green_light: '#DAF2E4',
 
   heading: '#52665A',
+  
   body: '#5C6660',
   body_dark: '#738078',
   body_light: '#AAB2AD',

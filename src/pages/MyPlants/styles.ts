@@ -18,5 +18,16 @@ export default StyleSheet.create({
     fontFamily: fonts.heading,
     lineHeight: 32,
     color: colors.heading
+  },
+  notFoundContainer: {
+    height: 200,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  notFoundText: {
+    fontSize: 18,
+    fontFamily: fonts.text,
+    textAlign: 'center',
+    color: colors.body
   }
 })

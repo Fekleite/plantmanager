@@ -3,16 +3,16 @@ import { Text, Image, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
 
+import { SafeAreaViewAndroid } from '../../components/SafeAreaViewAndroid';
+
 import wateringImg from '../../assets/watering.png';
 import styles from './styles';
-
-import { SafeAreaViewAndroid } from '../../components/SafeAreaViewAndroid';
 
 export function Welcome() {
   const navigation = useNavigation();
 
   function handleStart() {
-    navigation.navigate('UserIdentification')
+    navigation.navigate('UserIdentification');
   }
 
   return (

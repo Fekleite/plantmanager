@@ -2,15 +2,15 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/core';
 
-import styles from './styles';
-
 import { SafeAreaViewAndroid } from '../../components/SafeAreaViewAndroid';
 import { Button } from '../../components/Button';
+
+import styles from './styles';
 
 interface Params {
   title: string;
   subtitle: string;
-  buttonText: string;
+  textMedium: string;
   icon: 'smile' | 'hug';
   nextScreen: string;
 }
@@ -24,10 +24,10 @@ export function Confirmation() {
   const navigation = useNavigation();
   const routes = useRoute();
 
-  const { title, subtitle, buttonText, icon, nextScreen } = routes.params as Params;
+  const { title, subtitle, textMedium, icon, nextScreen } = routes.params as Params;
 
   function handleMoveOn() {
-    navigation.navigate(nextScreen)
+    navigation.navigate(nextScreen);
   }
   
   return (
@@ -45,7 +45,7 @@ export function Confirmation() {
         </Text>
 
         <View style={styles.footer}>
-          <Button text={buttonText} onPress={handleMoveOn} />
+          <Button text={textMedium} onPress={handleMoveOn} />
         </View>
       </View>
     </SafeAreaViewAndroid>

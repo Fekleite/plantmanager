@@ -12,10 +12,10 @@ import {
 import { useNavigation } from '@react-navigation/core';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import styles from './styles';
-
 import { SafeAreaViewAndroid } from '../../components/SafeAreaViewAndroid';
 import { Button } from '../../components/Button';
+
+import styles from './styles';
 
 export function UserIdentification() {
   const [isFocused, setIsFocused] = useState(false);
@@ -45,7 +45,7 @@ export function UserIdentification() {
       const params = {
         title: 'Prontinho',
         subtitle: 'Agora vamos começar a cuidar das suas plantinhas com muito cuidado.',
-        buttonText: 'Começar',
+        textMedium: 'Começar',
         icon: 'smile',
         nextScreen: 'PlantSelect',
       }

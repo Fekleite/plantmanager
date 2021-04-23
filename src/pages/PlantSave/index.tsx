@@ -8,6 +8,7 @@ import { isBefore, format } from 'date-fns';
 
 import { Button } from '../../components/Button';
 import { Tip } from '../../components/Tip';
+import { SafeAreaViewAndroid } from '../../components/SafeAreaViewAndroid';
 
 import { Plant, savePlant } from '../../libs/storage';
 
@@ -59,7 +60,7 @@ export function PlantSave() {
       const params = {
         title: 'Tudo certo',
         subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com bastante amor.',
-        buttonText: 'Muito obrigado :D',
+        textMedium: 'Muito obrigado :D',
         icon: 'hug',
         nextScreen: 'MyPlants',
       }
@@ -73,9 +74,9 @@ export function PlantSave() {
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={styles.container}
+      contentContainerStyle={styles.scrollContainer}
     >
-      <View style={styles.container}>
+      <SafeAreaViewAndroid style={styles.container}>
         <View style={styles.plantInfo}>
           <TouchableOpacity 
             style={styles.goBackButton}
@@ -123,7 +124,7 @@ export function PlantSave() {
                 style={styles.datePickerButton}
                 onPress={handleOpenDateTimePickerAndroid}
               >
-                <Text style={styles.datePickerButtonText}>
+                <Text style={styles.datePickertextMedium}>
                   {format(selectedDateTime, 'HH:mm')}
                 </Text>
               </TouchableOpacity>
@@ -135,7 +136,7 @@ export function PlantSave() {
             onPress={handleSavePlant}
           />
         </View>
-      </View>
+      </SafeAreaViewAndroid>
     </ScrollView>
   );
 }

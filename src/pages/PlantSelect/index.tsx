@@ -10,9 +10,10 @@ import { SafeAreaViewAndroid } from '../../components/SafeAreaViewAndroid';
 
 import api from '../../services/api';
 
+import { Plant as PlantState } from '../../libs/storage';
+
 import styles from './styles';
 
-import { Plant as PlantState } from '../../libs/storage';
 interface EnvironmentState {
   key: string;
   title: string;

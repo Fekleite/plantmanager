@@ -20,7 +20,7 @@ export default StyleSheet.create({
   },
   title: {
     fontSize: 17,
-    fontFamily: fonts.buttonText,
+    fontFamily: fonts.textMedium,
     lineHeight: 25,
     color: colors.body,
     marginLeft: 24
@@ -36,7 +36,7 @@ export default StyleSheet.create({
   },
   time: {
     fontSize: 13,
-    fontFamily: fonts.buttonText,
+    fontFamily: fonts.textMedium,
     lineHeight: 20,
     color: colors.body
   },

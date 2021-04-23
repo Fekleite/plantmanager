@@ -7,6 +7,10 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between'
   },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'space-between'
+  },
   plantInfo: {
     flex: 1,
     paddingHorizontal: 32,
@@ -22,7 +26,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    top: 50,
+    top: 25,
     left: 16,
   },
   goBackButtonIcon: {
@@ -45,7 +49,6 @@ export default StyleSheet.create({
   },
   controllers: {
     paddingHorizontal: 32,
-    paddingBottom: 25,
   },
   tipRelative: {
     position: 'relative',
@@ -70,7 +73,7 @@ export default StyleSheet.create({
     borderRadius: 10,
     marginTop: 16,
   },
-  datePickerButtonText: {
+  datePickertextMedium: {
     fontFamily: fonts.text,
     fontSize: 13,
     lineHeight: 25,

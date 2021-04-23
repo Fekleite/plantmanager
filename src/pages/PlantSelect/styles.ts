@@ -19,7 +19,7 @@ export default StyleSheet.create({
   },
   textActionStrong: {
     fontSize: 17,
-    fontFamily: fonts.buttonText,
+    fontFamily: fonts.textMedium,
     lineHeight: 23,
     color: colors.body
   },

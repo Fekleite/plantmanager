@@ -13,6 +13,6 @@ export default StyleSheet.create({
   text: {
     fontSize: 17,
     color: colors.white,
-    fontFamily: fonts.buttonText,
+    fontFamily: fonts.textMedium,
   },
 })
