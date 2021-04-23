@@ -6,12 +6,12 @@ import { useRoute, useNavigation } from '@react-navigation/core';
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
 import { isBefore, format } from 'date-fns';
 
-import styles from './styles';
-
 import { Button } from '../../components/Button';
+import { Tip } from '../../components/Tip';
 
 import { Plant, savePlant } from '../../libs/storage';
-import { Tip } from '../../components/Tip';
+
+import styles from './styles';
 
 interface Params {
   plant: Plant;
@@ -22,9 +22,9 @@ export function PlantSave() {
   const [showDatePicker, setShowDatePicker] = useState(Platform.OS == 'ios');
 
   const route = useRoute();
-  const { plant } = route.params as Params;
-
   const navigation = useNavigation();
+
+  const { plant } = route.params as Params;
 
   function handleGoBack() {
     navigation.goBack()
@@ -71,66 +71,71 @@ export function PlantSave() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.plantInfo}>
-        <TouchableOpacity 
-          style={styles.goBackButton}
-          onPress={handleGoBack}
-        >
-          <Feather name="chevron-left" style={styles.goBackButtonIcon} />
-        </TouchableOpacity>
-        <SvgFromUri 
-          uri={plant.photo}
-          height={120}
-          width={120}
-        />
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.container}
+    >
+      <View style={styles.container}>
+        <View style={styles.plantInfo}>
+          <TouchableOpacity 
+            style={styles.goBackButton}
+            onPress={handleGoBack}
+          >
+            <Feather name="chevron-left" style={styles.goBackButtonIcon} />
+          </TouchableOpacity>
+          <SvgFromUri 
+            uri={plant.photo}
+            height={120}
+            width={120}
+          />
 
-        <Text style={styles.title}>
-          {plant.name} 
-        </Text>
-
-        <Text style={styles.description}>
-          {plant.about}
-        </Text>
-      </View>
-
-      <View style={styles.controllers}>
-        <Tip 
-          text={plant.water_tips}
-          style={styles.tipRelative}
-        />
-
-        <View style={styles.alert}>
-          <Text style={styles.alertLabel}>
-            Escolha o melhor horário para ser lembrado:
+          <Text style={styles.title}>
+            {plant.name} 
           </Text>
 
-          {showDatePicker && (
-            <DateTimePicker 
-              value={selectedDateTime}
-              mode='time'
-              display='spinner'
-              onChange={handleChangeTime}
-            />
-          )}
-
-          {Platform.OS === 'android' && (
-            <TouchableOpacity 
-              style={styles.datePickerButton}
-              onPress={handleOpenDateTimePickerAndroid}
-            >
-              <Text style={styles.datePickerButtonText}>
-                {format(selectedDateTime, 'HH:mm')}
-              </Text>
-            </TouchableOpacity>
-          )}
+          <Text style={styles.description}>
+            {plant.about}
+          </Text>
         </View>
 
-        <Button 
-          text="Cadastrar planta"
-          onPress={handleSavePlant}
-        />
+        <View style={styles.controllers}>
+          <Tip 
+            text={plant.water_tips}
+            style={styles.tipRelative}
+          />
+
+          <View style={styles.alert}>
+            <Text style={styles.alertLabel}>
+              Escolha o melhor horário para ser lembrado:
+            </Text>
+
+            {showDatePicker && (
+              <DateTimePicker 
+                value={selectedDateTime}
+                mode='time'
+                display='spinner'
+                onChange={handleChangeTime}
+              />
+            )}
+
+            {Platform.OS === 'android' && (
+              <TouchableOpacity 
+                style={styles.datePickerButton}
+                onPress={handleOpenDateTimePickerAndroid}
+              >
+                <Text style={styles.datePickerButtonText}>
+                  {format(selectedDateTime, 'HH:mm')}
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
+
+          <Button 
+            text="Cadastrar planta"
+            onPress={handleSavePlant}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }

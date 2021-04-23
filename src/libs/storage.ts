@@ -16,7 +16,7 @@ export interface Plant {
   hour: string;
 }
 
-interface StoragePlant {
+export interface StoragePlant {
   [id: string]: {
     data: Plant;
   }
@@ -63,4 +63,13 @@ export async function loadPlant(): Promise<Plant[]> {
   } catch (error) {
     throw new Error(error);
   }
+}
+
+export async function removePlant(id: string): Promise<void> {
+  const data = await AsyncStorage.getItem('@plantmanager:plants');
+  const plants = data ? (JSON.parse(data) as StoragePlant) : {};
+
+  delete plants[id]
+
+  await AsyncStorage.setItem('@plantmanager:plants', JSON.stringify(plants));
 }

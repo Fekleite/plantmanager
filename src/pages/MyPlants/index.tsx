@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList, BackHandler, Alert } from 'react-native';
 import { Header } from '../../components/Header';
-import { formatDistance } from 'date-fns/esm';
-import ptBR from 'date-fns/esm/locale/pt-BR/index.js';
+import { formatDistance } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
-import { SafeAreaViewAndroid } from '../../components/SafeAreaViewAndroid';
 import { Tip } from '../../components/Tip';
 import { Load } from '../../components/Load';
 import { PlantCardSecondary } from '../../components/PlantCardSecondary';
 
-import { loadPlant, Plant } from '../../libs/storage';
+import { loadPlant, Plant, removePlant } from '../../libs/storage';
 
 import styles from './styles'
 
@@ -38,6 +37,26 @@ export function MyPlants() {
     loadStorageData();
   }, [])
 
+  function handleRemove(plant: Plant) {
+    Alert.alert('Remover', `Deseja remover a ${plant.name}?`, [
+      { text: 'Não', style: 'cancel' },
+      {
+        text: 'Sim',
+        onPress: async () => {
+          try {
+            await removePlant(String(plant.id))
+
+            setPlants((oldData) => (
+              oldData.filter(item => item.id !== plant.id)
+            ))
+          } catch(error) {
+              Alert.alert('Desculpe, não foi possível remover sua plantinha 😓')
+          }
+        }
+      }
+    ])
+  }
+
   if(isLoading) {
     return <Load />
   }
@@ -55,18 +74,21 @@ export function MyPlants() {
           Próximas regadas
         </Text>
 
-        <FlatList 
-          data={plants}
-          keyExtractor={(item) => String(item.id)}
-          renderItem={({ item }) => (
-            <PlantCardSecondary 
-              name={item.name}
-              photo={item.photo}
-              hour={item.hour}
-            />
-          )}
-          showsVerticalScrollIndicator={false}
-        />
+        {plants && (
+          <FlatList 
+            data={plants}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={({ item }) => (
+              <PlantCardSecondary 
+                name={item.name}
+                photo={item.photo}
+                hour={item.hour}
+                handleRemove={() => handleRemove(item)}
+              />
+            )}
+            showsVerticalScrollIndicator={false}
+          />
+        )}
       </View>
 
     </View>

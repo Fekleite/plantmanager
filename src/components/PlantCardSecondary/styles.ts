@@ -39,5 +39,17 @@ export default StyleSheet.create({
     fontFamily: fonts.buttonText,
     lineHeight: 20,
     color: colors.body
+  },
+  buttonRemove: {
+    width: 120,
+    height: 80,
+    marginTop: 16,
+    backgroundColor: colors.red,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+    right: 40,
+    paddingLeft: 30
   }
 })
