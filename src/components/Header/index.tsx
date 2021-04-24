@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import userImg from '../../assets/fernanda.png'
 import styles from './styles';
 
 interface HeaderProps {
@@ -11,14 +10,19 @@ interface HeaderProps {
 
 export function Header({ hasGreeting = false }: HeaderProps) {
   const [username, setUsername] = useState<string>();
+  const [image, setImage] = useState<string>();
 
   useEffect(() => {
-    async function getUsername() {
+    async function getUserInfos() {
       const storageUsername = await AsyncStorage.getItem('@plantmanager:user')
       setUsername(storageUsername || '');
+
+      const data = await AsyncStorage.getItem('@plantmanager:userAvatar');
+      const storageUserAvatar = data ? JSON.parse(data) : ''
+      setImage(storageUserAvatar.image);
     }
 
-    getUsername();
+    getUserInfos();
   }, [])
 
   return(
@@ -36,7 +40,7 @@ export function Header({ hasGreeting = false }: HeaderProps) {
           </Text>
         </View>
       )}
-      <Image source={userImg} style={styles.avatar}/>
+      <Image source={{uri: image}} style={styles.avatar}/>
     </View>
   )
 }

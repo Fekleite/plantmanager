@@ -42,15 +42,8 @@ export function UserIdentification() {
 
     try {
       await AsyncStorage.setItem('@plantmanager:user', name);
-      const params = {
-        title: 'Prontinho',
-        subtitle: 'Agora vamos começar a cuidar das suas plantinhas com muito cuidado.',
-        textMedium: 'Começar',
-        icon: 'smile',
-        nextScreen: 'PlantSelect',
-      }
 
-      navigation.navigate('Confirmation', params)
+      navigation.navigate('UserAvatar')
     } catch (error) {
       return Alert.alert('Ops, não foi possível salvar seu nome. 😓')
     }
@@ -103,7 +96,7 @@ export function UserIdentification() {
               />
 
               <View style={styles.footer}>
-                <Button text='Confirmar' onPress={handleSubmit} disabled={!(!!name)} />
+                <Button text='Prosseguir' onPress={handleSubmit} disabled={!(!!name)} />
               </View>
             </View>
           </View>
